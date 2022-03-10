@@ -1,0 +1,25 @@
+{
+  "name": "suchi",
+  "version": "1.0.0",
+  "description": "exhibition space 'suchi' webpage",
+  "main": "App.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/habibi03336/Suchi.git"
+  },
+  "author": "habibi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/habibi03336/Suchi/issues"
+  },
+  "homepage": "https://github.com/habibi03336/Suchi#readme"
+}
