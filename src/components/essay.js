@@ -3,6 +3,7 @@ class Essay {
     const $div = document.createElement('div');
     this.$essay = document.createTextNode(description);
     $div.appendChild(this.$essay);
+    $div.style.lineBreak = 'anywhere';
     this.$elem = $div;
   }
 

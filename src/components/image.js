@@ -1,8 +1,7 @@
 class Image {
-  constructor(imgSrc, width, height) {
+  constructor(imgSrc) {
     const $img = document.createElement('img');
-    $img.style.width = width;
-    $img.style.height = height;
+    $img.style.maxWidth = '100%';
     $img.src = imgSrc;
     this.$elem = $img;
   }
