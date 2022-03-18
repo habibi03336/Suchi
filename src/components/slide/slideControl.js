@@ -4,6 +4,7 @@ class SlideControl {
   constructor(buttonControlCallback) {
     this.buttonControlCallback = buttonControlCallback;
     this.$div = document.createElement('div');
+    this.$div.style.margin = 'auto';
     this.$button = document.createElement('div');
     const $centerLine = document.createElement('hr');
     addClassStyle(this.$div, SlideControl.sliderStyle);
@@ -12,6 +13,10 @@ class SlideControl {
     this.$button.addEventListener('mousedown', this.buttonControl.bind(this));
     document.addEventListener('mousemove', this.buttonControl.bind(this));
     document.addEventListener('mouseup', this.buttonControl.bind(this));
+    this.$button.addEventListener('touchstart', this.buttonControl.bind(this));
+    document.addEventListener('touchmove', this.buttonControl.bind(this));
+    document.addEventListener('touchend', this.buttonControl.bind(this));
+    document.addEventListener('touchcancel', this.buttonControl.bind(this));
     this.clicked = false;
     this.xCoord = 0;
     this.$div.appendChild(this.$button);
@@ -20,21 +25,22 @@ class SlideControl {
   }
 
   buttonControl(e) {
-    if (e.type === 'mousedown') {
+    if (['mousedown', 'touchstart'].includes(e.type)) {
       if (!this.clicked) {
         this.clicked = true;
-        this.xCoord = e.clientX;
+        this.xCoord = e.clientX || (e.touches ? e.touches[0].clientX : 0);
       }
-    } else if (e.type === 'mousemove' && this.clicked) {
+    } else if (['mousemove', 'touchmove'].includes(e.type) && this.clicked) {
+      const clientX = e.clientX || (e.touches ? e.touches[0].clientX : 0);
       const newLeft = Number(this.$button.style.left.slice(0, -1))
-        + (Number(e.clientX - this.xCoord) / this.$div.offsetWidth) * 100;
-      if (newLeft > 98.5 || newLeft < 0) {
+        + (Number(clientX - this.xCoord) / this.$div.offsetWidth) * 100;
+      if (newLeft > 100 || newLeft < 0) {
         return;
       }
       this.buttonControlCallback(newLeft);
       this.$button.style.left = `${newLeft}%`;
-      this.xCoord = e.clientX;
-    } else if (e.type === 'mouseup') {
+      this.xCoord = clientX;
+    } else if (['mouseup', 'touchend', 'touchcancel'].includes(e.type)) {
       this.clicked = false;
     }
   }
