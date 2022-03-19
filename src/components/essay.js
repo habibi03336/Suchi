@@ -4,6 +4,7 @@ class Essay {
     this.$essay = document.createTextNode(description);
     $div.appendChild(this.$essay);
     $div.style.lineBreak = 'anywhere';
+    $div.style.padding = '10%';
     this.$elem = $div;
   }
 

@@ -2,7 +2,7 @@ import Image from '../image.js';
 
 class SlideShow {
   constructor(imagesSrc) {
-    const images = imagesSrc.map((src) => new Image(src, '300px', '300px'));
+    const images = imagesSrc.map((src) => new Image(src, '200px', '200px'));
     this.images = images;
     const $div = document.createElement('div');
     $div.style.overflowX = 'hidden';

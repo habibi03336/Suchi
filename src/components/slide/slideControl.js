@@ -4,7 +4,7 @@ class SlideControl {
   constructor(buttonControlCallback) {
     this.buttonControlCallback = buttonControlCallback;
     this.$div = document.createElement('div');
-    this.$div.style.margin = 'auto';
+    this.$div.style.margin = '0 auto';
     this.$button = document.createElement('div');
     const $centerLine = document.createElement('hr');
     addClassStyle(this.$div, SlideControl.sliderStyle);

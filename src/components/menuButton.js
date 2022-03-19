@@ -2,8 +2,8 @@ import Image from './image.js';
 import addClassStyle from '../../lib/addClassStyle.js';
 
 class MenuButton extends Image {
-  constructor(imgSrc, width, height) {
-    super(imgSrc, width, height);
+  constructor(imgSrc) {
+    super(imgSrc);
     addClassStyle(this.$elem, MenuButton.buttonStyle);
   }
 

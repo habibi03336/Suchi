@@ -6,14 +6,13 @@ import addClassStyle from "../../lib/addClassStyle.js";
 class VerticalPart {
   constructor(imgSrc, title, date, description) {
     const $div = document.createElement('div');
-    addClassStyle($div, VerticalPart.containerStyle);
-    const image = new Image(imgSrc);
+    $div.style.paddingTop = '15%';
+    const image = new Image(imgSrc, '100%', '100%');
     const imageCaption = new ImageCaption(title, date);
     const $innerDiv = document.createElement('div');
     $innerDiv.append(image.$elem, imageCaption.$elem);
-    addClassStyle($innerDiv, { margin: 'auto', width: '60%' });
+    addClassStyle($innerDiv, { margin: 'auto', width: '42%'});
     const essay = new Essay(description);
-    addClassStyle(essay.$elem, { marginTop: '9%', marginBottom: '5%' });
     $div.append(
       $innerDiv,
       essay.$elem,
@@ -21,14 +20,6 @@ class VerticalPart {
 
     this.$elem = $div;
   }
-
-  static containerStyle = {
-    width: '80%',
-    padding: '5%',
-    paddingTop: '15%',
-    borderTop: '2px solid gray',
-    borderBottom: '2px solid gray',
-  };
 }
 
 export default VerticalPart;
