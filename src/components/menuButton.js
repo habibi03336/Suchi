@@ -8,6 +8,7 @@ class MenuButton extends Image {
   }
 
   static buttonStyle = {
+    padding: '1.2%',
     display: 'inline-block',
     border: '5px solid gray',
   };

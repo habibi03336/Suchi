@@ -14,6 +14,12 @@ class SlideShow {
       this.images[this.currentImage].$elem.style.boxShadow = '0px 0px 30px black';
     }
     this.totalImageWidth = 0;
+
+    const $arrow = document.createElement('img');
+    $arrow.src = '../../../asset/arrow.svg';
+    $arrow.style.width = '2%';
+    $arrow.style.marginLeft = '5%';
+    $innerDiv.appendChild($arrow);
     for (let i = 0; i < images.length; i++) {
       $innerDiv.appendChild(images[i].$elem);
     }

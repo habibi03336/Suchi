@@ -16,9 +16,10 @@ class HorizontalPart {
     $topInnerDiv.style.height = '22%';
     menuButton.$elem.style.width = menuButtonsize;
     menuButton.$elem.style.height = menuButtonsize;
-    const $title = document.createElement('span');
-    $title.appendChild(document.createTextNode(' 수 치 '));
-    $topInnerDiv.append($title, menuButton.$elem);
+    const $logo = document.createElement('img');
+    $logo.src = '../../asset/logo.svg';
+    $logo.style.width = '10%';
+    $topInnerDiv.append($logo, menuButton.$elem);
 
     const slide = new Slide(imgsSrc);
     slide.$elem.style.maxWidth = '100%';
