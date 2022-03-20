@@ -1,5 +1,6 @@
 import HorizontalPart from './containers/horizontalPart.js';
 import VerticalPart from './containers/verticalPart.js';
+import COLOR from './constants/color.js'
 
 class Main {
   constructor(imgsSrc, buttonImgSrc, buttonSize, verticalData) {
@@ -13,13 +14,13 @@ class Main {
     $leftDiv.style.width = '47%';
     $leftDiv.style.overflow = 'scroll';
     $leftDiv.style.marginRight = '3%';
-    $leftDiv.style.borderTop = '2px solid gray';
-    $leftDiv.style.borderBottom = '2px solid gray';
-    //$leftDiv.style.borderRight = '2px solid gray';
+    $leftDiv.style.borderTop = `2px solid ${COLOR.MAIN}`;
+    $leftDiv.style.borderBottom = `2px solid ${COLOR.MAIN}`;
+    //$leftDiv.style.borderRight = `2px solid ${COLOR.MAIN}`;
 
     $rightDiv.style.width = '50%';
-    $rightDiv.style.borderRight = '2px solid gray';
-    $rightDiv.style.borderLeft = '2px solid gray';
+    $rightDiv.style.borderRight = `2px solid ${COLOR.MAIN}`;
+    $rightDiv.style.borderLeft = `2px solid ${COLOR.MAIN}`;
 
     $leftDiv.appendChild(verticalPart.$elem);
     $rightDiv.appendChild(horizontalPart.$elem);

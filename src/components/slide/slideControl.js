@@ -1,4 +1,5 @@
 import addClassStyle from '../../../lib/addClassStyle.js';
+import COLOR from '../../constants/color.js';
 
 class SlideControl {
   constructor(buttonControlCallback) {
@@ -47,7 +48,7 @@ class SlideControl {
 
   static centerLineStyle = {
     position: 'absolute',
-    border: '2px solid gray',
+    border: `1px solid ${COLOR.MAIN}`,
     width: '100%',
     zIndex: '-1',
   };
@@ -55,17 +56,16 @@ class SlideControl {
   static sliderStyle = {
     position: 'relative',
     width: '100%',
-    height: '20px',
   };
 
   static slider_buttonStyle = {
+    marginTop: '1.5px',
     position: 'absolute',
-    display: 'inline-block',
-    width: '20px',
-    height: '100%',
-    backgroundColor: 'gray',
+    width: '15px',
+    height: '15px',
+    backgroundColor: COLOR.MAIN,
     left: '0%',
-    clipPath: 'circle(50%)',
+    clipPath: 'circle(49%)',
   };
 }
 

@@ -11,7 +11,7 @@ class HorizontalPart {
     const $topInnerDiv = document.createElement('div');
     $topInnerDiv.style.display = 'flex';
     $topInnerDiv.style.justifyContent = 'center';
-    $topInnerDiv.style.gap = '50%';
+    $topInnerDiv.style.gap = '45%';
     $topInnerDiv.style.alignItems = 'center';
     $topInnerDiv.style.height = '22%';
     menuButton.$elem.style.width = menuButtonsize;
@@ -23,15 +23,15 @@ class HorizontalPart {
 
     const slide = new Slide(imgsSrc);
     slide.$elem.style.maxWidth = '100%';
-    slide.$elem.style.height = '74%';
+    slide.$elem.style.height = '60%';
 
     const $footerDiv = document.createElement('footer');
-    $footerDiv.style.height = '4%';
+    $footerDiv.style.height = '18%';
     $footerDiv.style.display = 'flex';
     $footerDiv.style.justifyContent = 'center';
     $footerDiv.style.alignItems = 'end';
-    $footerDiv.style.gap = '5%';
-    $footerDiv.style.fontSize = '14px';
+    $footerDiv.style.gap = '10%';
+    $footerDiv.style.fontSize = '12px';
     const $email = document.createElement('div');
     $email.textContent = 'email_2022suchi@gmail.com';
     const $insta = document.createElement('div');

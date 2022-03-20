@@ -11,7 +11,7 @@ class Slide {
     this.slideShow = new SlideShow(imgsSrc);
     this.slideControl = new SlideControl(this.slideSync.bind(this));
     this.slideControl.$elem.style.width = '80%';
-    this.slideControl.$elem.style.marginTop = '10.5%';
+    this.slideControl.$elem.style.marginTop = '4%';
     $div.append(
       this.slideShow.$elem,
       this.slideControl.$elem,

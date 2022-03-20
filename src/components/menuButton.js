@@ -1,5 +1,6 @@
 import Image from './image.js';
 import addClassStyle from '../../lib/addClassStyle.js';
+import COLOR from '../constants/color.js';
 
 class MenuButton extends Image {
   constructor(imgSrc) {
@@ -10,7 +11,7 @@ class MenuButton extends Image {
   static buttonStyle = {
     padding: '1.2%',
     display: 'inline-block',
-    border: '5px solid gray',
+    border: `3.5px solid ${COLOR.MAIN}`,
   };
 }
 

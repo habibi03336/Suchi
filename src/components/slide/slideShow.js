@@ -6,6 +6,9 @@ class SlideShow {
     this.images = images;
     const $div = document.createElement('div');
     $div.style.overflowX = 'hidden';
+    $div.style.height = '40%';
+    $div.style.paddingTop = '9%';
+    $div.style.paddingBottom = '5%';
     const $innerDiv = document.createElement('div');
     $innerDiv.style.display = 'flex';
     $innerDiv.style.gap = '10%';
