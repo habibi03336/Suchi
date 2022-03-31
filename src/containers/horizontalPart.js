@@ -1,4 +1,5 @@
-import Slide from '../components/slide/slide.js';
+// import Slide from '../components/slide/slide.js';
+import ImageScrollSlide from '../components/ImageScrollSlide.js';
 import MenuButton from '../components/menuButton.js';
 
 class HorizontalPart {
@@ -21,9 +22,13 @@ class HorizontalPart {
     $logo.style.width = '10%';
     $topInnerDiv.append($logo, menuButton.$elem);
 
-    const slide = new Slide(imgsSrc);
+    // const slide = new Slide(imgsSrc);
+    // slide.$elem.style.maxWidth = '100%';
+    // slide.$elem.style.height = '60%';
+
+    const slide = new ImageScrollSlide($div, imgsSrc);
+    console.log(imgsSrc);
     slide.$elem.style.maxWidth = '100%';
-    slide.$elem.style.height = '60%';
 
     const $footerDiv = document.createElement('footer');
     $footerDiv.style.height = '18%';
