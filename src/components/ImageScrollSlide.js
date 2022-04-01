@@ -3,9 +3,12 @@ import addClassStyle from "../../lib/addClassStyle.js";
 import Image from "./image.js";
 
 class ImageScrollSlide {
+    #centerX;
+    #imgsCenterX;
+
     constructor($parentDiv, imgsSrc, imgMaxHeight = '100px', imgMaxWidth = '100px'){
+        this.#imgsCenterX = [];
         this.$elem = document.createElement('div');
-        this.translate = 0;
         const $centerLine  = document.createElement('hr');
         addClassStyle($centerLine, ImageScrollSlide.centerLineStyle);
        
@@ -14,9 +17,9 @@ class ImageScrollSlide {
         
         $parentDiv.addEventListener('wheel', this.scrollHandler.bind(this));
         
-        imgsSrc.forEach(src => {
+        imgsSrc.forEach((src, idx) => {
             const image = new Image(src, imgMaxWidth, imgMaxHeight);
-            addClassStyle(image.$elem, {marginRight: '2.5%', marginLeft: '2.5%', verticalAlign: 'bottom',});
+            addClassStyle(image.$elem, {paddingRight: '10%', paddingLeft: '10%', verticalAlign: 'bottom',});
             $imgDiv.appendChild(image.$elem);
         });
         
@@ -27,15 +30,45 @@ class ImageScrollSlide {
             $inner
         );
         this.$imgDiv = $imgDiv;
+
+        window.initLayout.push(this.initLayout.bind(this));
+    }
+
+    initLayout(){
+        const firstImg = this.$imgDiv.children[0];
+        firstImg.onload = () => {
+            this.initalCenterX = (this.$imgDiv.offsetWidth-firstImg.offsetWidth)/2;
+            this.#centerX = this.initalCenterX;
+            firstImg.style.transform = 'scale(1.3, 1.3)';
+            this.$imgDiv.style.transform = `translateX(${this.#centerX}px)`;
+        }
     }
 
     scrollHandler(e){
         e.preventDefault();
-        this.translate -= (e.deltaY + e.deltaX)/2;
-        if (this.translate > 0){
-            this.translate = 0;
+        if (this.#imgsCenterX[0] === undefined){
+            let startX = 0;
+            [...this.$imgDiv.children].forEach($elem => {
+                this.#imgsCenterX.push(startX + $elem.offsetWidth/2);
+                startX = startX + $elem.offsetWidth
+            });
         }
-        this.$imgDiv.style.transform = `translateX(${this.translate}px)`;
+      
+        this.#centerX += (e.deltaY + e.deltaX)/2;
+        if (this.#centerX < this.initalCenterX){
+            this.#centerX = this.initalCenterX
+        } else if (this.#centerX >= this.#imgsCenterX[this.#imgsCenterX.length-1] + 100) {
+            this.#centerX = this.#imgsCenterX[this.#imgsCenterX.length-1] + 100;
+        }
+        this.$imgDiv.style.transform = `translateX(${2*this.initalCenterX - this.#centerX}px)`;
+
+        [...this.$imgDiv.children].forEach(($elem, idx) => {
+            const offset = Math.abs(this.#centerX -  this.#imgsCenterX[idx]);
+            if (offset < 200){
+                const scaleSize = 1.4 - offset/500;
+                $elem.style.transform = `scale(${scaleSize}, ${scaleSize})`
+            }
+        });
     }
 
     static innerStyle = {
