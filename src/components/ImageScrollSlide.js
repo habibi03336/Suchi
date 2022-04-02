@@ -3,7 +3,7 @@ import addClassStyle from "../../lib/addClassStyle.js";
 import Image from "./image.js";
 
 class ImageScrollSlide {
-    #centerX;
+    #pivotX;
     #imgsCenterX;
 
     constructor($parentDiv, imgsSrc, imgMaxHeight = '100px', imgMaxWidth = '100px'){
@@ -35,12 +35,13 @@ class ImageScrollSlide {
     }
 
     initLayout(){
-        const firstImg = this.$imgDiv.children[0];
-        firstImg.onload = () => {
-            this.initalCenterX = (this.$imgDiv.offsetWidth-firstImg.offsetWidth)/2;
-            this.#centerX = this.initalCenterX;
-            firstImg.style.transform = 'scale(1.3, 1.3)';
-            this.$imgDiv.style.transform = `translateX(${this.#centerX}px)`;
+        const $firstImg = this.$imgDiv.children[0];
+        $firstImg.onload = () => {
+            this.translateX = (this.$imgDiv.offsetWidth-$firstImg.offsetWidth)/2;
+            this.#pivotX = $firstImg.offsetWidth/2;
+            // this.$imgDiv.style.transform = `translateX(${this.#pivotX}px)`;
+            const dummyEvent = {preventDefault: function(){}, deltaX:0, deltaY:0};
+            this.scrollHandler(dummyEvent);
         }
     }
 
@@ -53,25 +54,35 @@ class ImageScrollSlide {
                 startX = startX + $elem.offsetWidth
             });
         }
-      
-        this.#centerX += (e.deltaY + e.deltaX)/2;
-        if (this.#centerX < this.initalCenterX){
-            this.#centerX = this.initalCenterX
-        } else if (this.#centerX >= this.#imgsCenterX[this.#imgsCenterX.length-1] + 100) {
-            this.#centerX = this.#imgsCenterX[this.#imgsCenterX.length-1] + 100;
+        
+        this.translateX -= (e.deltaY + e.deltaX)/2;
+        this.#pivotX += (e.deltaY + e.deltaX)/2;
+        if (this.#pivotX < this.#imgsCenterX[0]){
+            this.#pivotX = this.#imgsCenterX[0];
+            this.translateX = (this.$imgDiv.offsetWidth - this.$imgDiv.children[0].offsetWidth)/2;
+        } else if (this.#pivotX >= this.#imgsCenterX[this.#imgsCenterX.length-1]) {
+            this.#pivotX = this.#imgsCenterX[this.#imgsCenterX.length-1];
+            this.translateX = 
+                this.$imgDiv.offsetWidth/2 -
+                this.#imgsCenterX[this.#imgsCenterX.length-1];
         }
-        this.$imgDiv.style.transform = `translateX(${2*this.initalCenterX - this.#centerX}px)`;
-
+        this.$imgDiv.style.transform = `translateX(${this.translateX}px)`;
+        console.log(this.#pivotX);
+        console.log(this.#imgsCenterX);
         [...this.$imgDiv.children].forEach(($elem, idx) => {
-            const offset = Math.abs(this.#centerX -  this.#imgsCenterX[idx]);
-            if (offset < 200){
-                const scaleSize = 1.4 - offset/500;
+            const offset = Math.abs(this.#pivotX -  this.#imgsCenterX[idx]);
+            if (offset < 500){
+                let scaleSize = 1.5 - offset/1000;
+                if (scaleSize < 1) {
+                    scaleSize = 1;
+                }
                 $elem.style.transform = `scale(${scaleSize}, ${scaleSize})`
             }
         });
     }
 
     static innerStyle = {
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
