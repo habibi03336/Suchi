@@ -1,6 +1,9 @@
 import HorizontalPart from './containers/horizontalPart.js';
 import VerticalPart from './containers/verticalPart.js';
 import COLOR from './constants/color.js'
+import addClassStyle from '../lib/addClassStyle.js';
+import itemFetch from './modules/itemFetch.js';
+
 
 class Main {
   constructor(imgsSrc, buttonImgSrc, buttonSize, verticalData) {
@@ -9,33 +12,56 @@ class Main {
 
     const $div = document.createElement('div');
     $div.style.display = 'flex';
+    addClassStyle($div, {flexDirection:'column'});
     const $leftDiv = document.createElement('div');
     const $rightDiv = document.createElement('div');
-    $leftDiv.style.width = '47%';
-    $leftDiv.style.overflow = 'scroll';
-    $leftDiv.style.marginRight = '3%';
-    $leftDiv.style.borderTop = `2px solid ${COLOR.MAIN}`;
-    $leftDiv.style.borderBottom = `2px solid ${COLOR.MAIN}`;
-    //$leftDiv.style.borderRight = `2px solid ${COLOR.MAIN}`;
+
+    addClassStyle(verticalPart.$elem, {width: '100%', borderTop: `2px solid ${COLOR.MAIN}`, borderBottom: `2px solid ${COLOR.MAIN}`});
+    addClassStyle($leftDiv, {overflow: 'scroll', marginRight: '3%', marginLeft: '3%', borderBottom : `2px solid ${COLOR.MAIN}`});
 
     $rightDiv.style.width = '50%';
     $rightDiv.style.borderRight = `2px solid ${COLOR.MAIN}`;
     $rightDiv.style.borderLeft = `2px solid ${COLOR.MAIN}`;
 
-    $leftDiv.appendChild(verticalPart.$elem);
-    $rightDiv.appendChild(horizontalPart.$elem);
-    $div.append(
-      $leftDiv,
-      $rightDiv,
+    const $header = document.createElement('div');
+    const $logo = document.createElement('img');
+    const $suchi = document.createElement('div');
+    $suchi.appendChild(document.createTextNode('수치 [suchi]'));
+    addClassStyle($header, { marginRight: '3%', marginLeft: '3%'});
+    $header.append(
+      $suchi
     );
 
-    $div.style.height = `${window.innerHeight - window.innerWidth * 0.062 - 4}px`;
-    $div.style.padding = '3%';
-    $div.style.border = '2px solid black';
+    const $contact = document.createElement('div');
+    addClassStyle($contact, {writingMode: 'vertical-rl'});
+    $contact.appendChild(document.createTextNode('asdfasdf'));
+
+    $leftDiv.append(verticalPart.$elem);
+    $rightDiv.appendChild(horizontalPart.$elem);
+    const $mainBody = document.createElement('div');
+    $mainBody.append($leftDiv, $rightDiv, $contact);
+    addClassStyle($mainBody, {display:'flex', flexDirection:'row', overflow:'scroll'});
+
+    $div.append(
+      $header,
+      $mainBody
+    );
+
+    $div.style.height = `${window.innerHeight - window.innerWidth * 0.002 - 4 }px`;
     $div.style.margin = '0.1%';
 
     // window.addEventListener('resize', this.resize.bind(this));
     this.$elem = $div;
+
+
+    window.addEventListener('click', (e) => {
+      if (e.target.type === 'scroll'){
+        itemFetch(e.target.id, (data) => {
+          horizontalPart.poster.update(data.imgSrc, data.description);
+          verticalPart.essay.update(data.title, data.author, data.date, data.description) ;
+        })
+      } 
+    });
   }
 
   // resize() {
