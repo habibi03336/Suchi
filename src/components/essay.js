@@ -19,11 +19,11 @@ class Essay {
     this.$elem = $div;
   }
 
-  changeContent(title, author, date, description) {
-    this.$title.removeChild();
-    this.$author.removeChild();
-    this.$date.removeChild();
-    this.$description.removeChild();
+  update(title, author, date, description) {
+    this.$title.textContent = '';
+    this.$author.textContent = '';
+    this.$date.textContent = '';
+    this.$description.textContent = '';
 
     this.$title.append(document.createTextNode(title));
     this.$author.append(document.createTextNode(author));
