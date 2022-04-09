@@ -1,23 +1,23 @@
 import Image from "../components/image.js";
-import ImageCaption from "../components/imageCaption.js";
 import Essay from "../components/essay.js";
+import COLOR from "../constants/color.js";
 import addClassStyle from "../../lib/addClassStyle.js";
 
 class VerticalPart {
-  constructor(imgSrc, title, date, description) {
+  constructor(title, author, date, description, imgsSrc) {
     const $div = document.createElement('div');
-    $div.style.paddingTop = '15%';
-    const image = new Image(imgSrc, '100%', '100%');
-    const imageCaption = new ImageCaption(title, date);
-    const $innerDiv = document.createElement('div');
-    $innerDiv.append(image.$elem, imageCaption.$elem);
-    addClassStyle($innerDiv, { margin: 'auto', width: '42%'});
-    const essay = new Essay(description);
-    $div.append(
-      $innerDiv,
-      essay.$elem,
-    );
 
+    const essay = new Essay(title, author, date, description);
+    const $imageDiv = document.createElement('div');
+    imgsSrc.forEach(src => {
+      const image = new Image(src, '100%', '100%');
+      $imageDiv.append(image.$elem);
+    });
+    $div.append(
+      essay.$elem,
+      $imageDiv,
+    );
+    this.essay = essay;
     this.$elem = $div;
   }
 }

@@ -3,10 +3,10 @@ import addClassStyle from "../../lib/addClassStyle.js";
 class Image {
   constructor(imgSrc, maxWidth, maxHeight) {
     const $img = document.createElement('img');
+    $img.src = imgSrc;
     $img.style.maxWidth = maxWidth;
     $img.style.maxHeight = maxHeight;
     addClassStyle($img, Image.imageStyle);
-    $img.src = imgSrc;
     this.$elem = $img;
   }
 
@@ -16,6 +16,7 @@ class Image {
   }
 
   static imageStyle = {
+    display: 'inline-block',
     width: 'auto',
     height: 'auto',
   };
