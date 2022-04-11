@@ -1,25 +1,44 @@
-// import Slide from '../components/slide/slide.js';
 import ImageScrollSlide from '../components/ImageScrollSlide.js';
 import Poster from '../components/poster.js';
-import MenuButton from '../components/menuButton.js';
 
 class HorizontalPart {
-  constructor(imgsSrc, menuButtonImgSrc, menuButtonsize) {
+  constructor() {
     const $div = document.createElement('div');
     $div.style.height = '100%';
     $div.style.userSelect = 'none';
 
-    const slide = new ImageScrollSlide($div, imgsSrc);
+    const slide = new ImageScrollSlide($div, ...HorizontalPart.imageScrollSlideViewModel());
     slide.$elem.style.maxWidth = '100%';
     slide.$elem.style.height = '30%';
 
-    const poster = new Poster(imgsSrc[0], "내 지금이 수치다. 난 모든 걸  뒤엎고 싶다.")
+    const poster = new Poster()
     $div.append(
       poster.$elem, 
       slide.$elem,
     );
     this.poster = poster;
     this.$elem = $div;
+  }
+
+  static imageScrollSlideViewModel(){
+    const imgsSrc = window.model.scrollImgs;
+    const ids = []
+    for (let i = 0; i < imgsSrc.length; i++) {
+      ids.push(imgsSrc[i].slice(-5,-4));
+    } 
+    return [imgsSrc, ids]
+  }
+
+  static posterViewModel(){
+    const imgSrc = window.model.poster;
+    const description = window.model.description;
+
+    return [imgSrc, description];
+  }
+
+  update(){
+    console.log('update');
+    this.poster.update(...HorizontalPart.posterViewModel());
   }
 }
 
