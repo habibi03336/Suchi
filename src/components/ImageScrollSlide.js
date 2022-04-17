@@ -6,7 +6,7 @@ class ImageScrollSlide {
     #pivotX;
     #imgsCenterX;
 
-    constructor($parentDiv, imgsSrc, ids,imgMaxHeight = '100px', imgMaxWidth = '100px'){
+    constructor($parentDiv, imgsSrc, ids){
         this.#imgsCenterX = [];
         this.$elem = document.createElement('div');
         const $centerLine  = document.createElement('hr');
@@ -17,7 +17,7 @@ class ImageScrollSlide {
         $parentDiv.addEventListener('wheel', this.scrollHandler.bind(this));
 
         imgsSrc.forEach((src, idx) => {
-            const image = new Image(src, imgMaxWidth, imgMaxHeight);
+            const image = new Image(src, '25%', '25%');
             addClassStyle(image.$elem, {paddingRight: '10%', paddingLeft: '10%', verticalAlign: 'bottom',});
             image.$elem.type = 'scroll';
             image.$elem.exhibitionId = ids[idx];
@@ -76,7 +76,7 @@ class ImageScrollSlide {
         [...this.$imgDiv.children].forEach(($elem, idx) => {
             const offset = Math.abs(this.#pivotX -  this.#imgsCenterX[idx]);
             if (offset < 500){
-                let scaleSize = 1.5 - offset/1000;
+                let scaleSize = 2 - offset/500;
                 if (scaleSize < 1) {
                     scaleSize = 1;
                 }
@@ -98,8 +98,9 @@ class ImageScrollSlide {
     }
 
     static imgDivStyle = {
-        display: 'block',
+        display: 'flex',
         whiteSpace: 'nowrap',
+        alignItems: 'center',
     }
 
     static centerLineStyle = {

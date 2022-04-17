@@ -30,10 +30,18 @@ class HorizontalPart {
   }
 
   static posterViewModel(){
+    //title, author, planner, writer,design, date, place, time, holder
     const imgSrc = window.model.poster;
-    const description = window.model.description;
-
-    return [imgSrc, description];
+    const title = window.model.title;
+    const author = window.model.author;
+    const planner = '주아명, 임재균';
+    const writer = '주아명';
+    const design = '곽나현, 이재석';
+    const date = window.model.date;
+    const place = '수치, 서울특별시 성북구 보문로 63 5층 503';
+    const time = '11am ~ 6pm';
+    const holder = '수치';
+    return [imgSrc, title, author, planner, writer, design, date, place, time, holder];
   }
 
   update(){
