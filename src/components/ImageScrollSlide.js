@@ -36,14 +36,19 @@ class ImageScrollSlide {
     }
 
     initLayout(){
-        const $firstImg = this.$imgDiv.children[0];
-        $firstImg.onload = () => {
-            this.translateX = (this.$imgDiv.offsetWidth-$firstImg.offsetWidth)/2;
-            this.#pivotX = $firstImg.offsetWidth/2;
-            // this.$imgDiv.style.transform = `translateX(${this.#pivotX}px)`;
-            const dummyEvent = {preventDefault: function(){}, deltaX:0, deltaY:0};
-            this.scrollHandler(dummyEvent);
+        let isLoaded = true;
+        [...this.$imgDiv.children].forEach(($img) => {
+            if ($img.complete === false) isLoaded = false;
+        })
+        if (isLoaded === false){
+            setTimeout(this.initLayout.bind(this), 10)
+            return;
         }
+        const $firstImg = this.$imgDiv.children[0];
+        this.translateX = (this.$imgDiv.offsetWidth-$firstImg.offsetWidth)/2;
+        this.#pivotX = $firstImg.offsetWidth/2;
+        const dummyEvent = {preventDefault: function(){}, deltaX:0, deltaY:0};
+        this.scrollHandler(dummyEvent);
     }
 
     scrollHandler(e){
