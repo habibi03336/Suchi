@@ -43,6 +43,9 @@ class Main {
       $headerLeft
     );
 
+    const $footer = document.createElement('footer');
+    addClassStyle($footer, {})
+
     const $contact = document.createElement('div');
     addClassStyle($contact, {writingMode: 'vertical-rl', fontSize: '0.2rem', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems:'center', width: '3%', fontWeight:'lighter'});
     const $email = document.createElement('span');
@@ -57,7 +60,7 @@ class Main {
     $rightDiv.appendChild(horizontalPart.$elem);
     const $mainBody = document.createElement('div');
     $mainBody.append($leftDiv, $rightDiv, $contact);
-    addClassStyle($mainBody, {height:'97%', display:'flex', flexDirection:'row', overflow:'scroll'});
+    addClassStyle($mainBody, {height:'91%', display:'flex', flexDirection:'row', overflow:'scroll'});
 
     $div.append(
       $header,

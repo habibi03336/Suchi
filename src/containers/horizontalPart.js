@@ -1,11 +1,11 @@
 import ImageScrollSlide from '../components/ImageScrollSlide.js';
 import Poster from '../components/poster.js';
+import addClassStyle from '../../lib/addClassStyle.js';
 
 class HorizontalPart {
   constructor() {
     const $div = document.createElement('div');
-    $div.style.height = '100%';
-    $div.style.userSelect = 'none';
+    addClassStyle($div, {height: '100%', userSelect: 'none'});
 
     const slide = new ImageScrollSlide($div, ...HorizontalPart.imageScrollSlideViewModel());
     slide.$elem.style.maxWidth = '100%';
@@ -45,7 +45,6 @@ class HorizontalPart {
   }
 
   update(){
-    console.log('update');
     this.poster.update(...HorizontalPart.posterViewModel());
   }
 }

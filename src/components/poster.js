@@ -10,11 +10,11 @@ class Poster {
     };
 
     constructor(){
-        this.$elem = document.createElement('div');
+        this.$elem = document.createElement('poster');
         addClassStyle(this.$elem, {display:'flex', justifyContent:'center', alignItems:'center', height: '70%',padding:'0 10% 0 10%'});
         const symbol = new Image(Poster.defaultContent.symbol, '18%', '18%');
         const $infoDiv = document.createElement('div');
-        addClassStyle($infoDiv, {padding: '0 3% 0 10%', fontSize: '0.8rem', fontWeight:'lighter'});
+        addClassStyle($infoDiv, {padding: '0 0 0 10%', fontSize: '0.8rem', fontWeight:'lighter'});
         const $title = document.createElement('p');
         $title.appendChild(document.createTextNode(Poster.defaultContent.title));
         const $description = document.createElement('p');

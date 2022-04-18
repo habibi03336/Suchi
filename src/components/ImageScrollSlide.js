@@ -18,14 +18,16 @@ class ImageScrollSlide {
 
         imgsSrc.forEach((src, idx) => {
             const image = new Image(src, '25%', '25%');
-            addClassStyle(image.$elem, {paddingRight: '10%', paddingLeft: '10%', verticalAlign: 'bottom',});
+            addClassStyle(image.$elem, {paddingRight: '5%', paddingLeft: '5%', verticalAlign: 'bottom',});
             image.$elem.type = 'scroll';
             image.$elem.exhibitionId = ids[idx];
             $imgDiv.appendChild(image.$elem);
         });
         
         const $inner = document.createElement('div');
-        $inner.append($centerLine, $imgDiv);
+        $inner.append(
+            $centerLine, 
+            $imgDiv);
         addClassStyle($inner, ImageScrollSlide.innerStyle);
         this.$elem.append(
             $inner
@@ -75,8 +77,8 @@ class ImageScrollSlide {
         this.$imgDiv.style.transform = `translateX(${this.translateX}px)`;
         [...this.$imgDiv.children].forEach(($elem, idx) => {
             const offset = Math.abs(this.#pivotX -  this.#imgsCenterX[idx]);
-            if (offset < 500){
-                let scaleSize = 2 - offset/500;
+            if (offset < 100){
+                let scaleSize = 2 - offset/100;
                 if (scaleSize < 1) {
                     scaleSize = 1;
                 }
