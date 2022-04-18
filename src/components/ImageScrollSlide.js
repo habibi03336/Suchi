@@ -20,6 +20,7 @@ class ImageScrollSlide {
             const image = new Image(src, '25%', '25%');
             addClassStyle(image.$elem, {paddingRight: '5%', paddingLeft: '5%', verticalAlign: 'bottom',});
             image.$elem.type = 'scroll';
+            image.$elem.orderIdx = idx;
             image.$elem.exhibitionId = ids[idx];
             $imgDiv.appendChild(image.$elem);
         });
@@ -35,6 +36,18 @@ class ImageScrollSlide {
         this.$imgDiv = $imgDiv;
 
         window.initLayout.push(this.initLayout.bind(this));
+
+        this.$imgDiv.addEventListener('click', (e) => {
+            if (e.target.type === 'scroll'){
+                this.$imgDiv.style.transition = 'transform 0.3s';
+                this.$imgDiv.className = 'imageScrollSlideDiv';
+                this.#pivotX = this.#imgsCenterX[e.target.orderIdx];
+                this.translateX = 
+                    this.$imgDiv.offsetWidth/2 -
+                    this.#imgsCenterX[e.target.orderIdx];
+                this.makeAnimation();
+            }
+        });
     }
 
     initLayout(){
@@ -63,6 +76,7 @@ class ImageScrollSlide {
             });
         }
         
+        this.$imgDiv.style.transition = 'transform 0s';
         this.translateX -= (e.deltaY + e.deltaX)/2;
         this.#pivotX += (e.deltaY + e.deltaX)/2;
         if (this.#pivotX < this.#imgsCenterX[0]){
@@ -74,16 +88,19 @@ class ImageScrollSlide {
                 this.$imgDiv.offsetWidth/2 -
                 this.#imgsCenterX[this.#imgsCenterX.length-1];
         }
+        this.makeAnimation();
+    }
+
+    makeAnimation(){
         this.$imgDiv.style.transform = `translateX(${this.translateX}px)`;
         [...this.$imgDiv.children].forEach(($elem, idx) => {
             const offset = Math.abs(this.#pivotX -  this.#imgsCenterX[idx]);
-            if (offset < 100){
-                let scaleSize = 2 - offset/100;
-                if (scaleSize < 1) {
-                    scaleSize = 1;
-                }
-                $elem.style.transform = `scale(${scaleSize}, ${scaleSize})`
+            let scaleSize = 1;
+            if (offset < 150){
+                scaleSize = 2 - offset/150;
             }
+            $elem.style.zIndex = Math.ceil((1 - scaleSize) * 100);
+            $elem.style.transform = `scale(${scaleSize}, ${scaleSize})`
         });
     }
 
