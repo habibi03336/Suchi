@@ -1,7 +1,7 @@
 import addClassStyle from "../../lib/addClassStyle.js";
 
 class Essay {
-  constructor(title, author, date, description) {
+  constructor({ title, author, date, description }) {
     const $div = document.createElement('div');
     this.$title = document.createElement('h1');
     addClassStyle(this.$title, {marginBottom:'3%'});
@@ -24,7 +24,7 @@ class Essay {
     this.$elem = $div;
   }
 
-  update(title, author, date, description) {
+  update({ title, author, date, description }) {
     this.$title.textContent = '';
     this.$author.textContent = '';
     this.$date.textContent = '';

@@ -2,14 +2,14 @@ import HorizontalPart from './containers/horizontalPart.js';
 import VerticalPart from './containers/verticalPart.js';
 import COLOR from './constants/color.js'
 import addClassStyle from '../lib/addClassStyle.js';
-import itemFetch from '../modules/itemFetch.js';
 import Image from './components/image.js';
 
 
 class Main {
-  constructor() {
-    const horizontalPart = new HorizontalPart();
-    const verticalPart = new VerticalPart();
+  constructor(model) {
+    this.model = model;
+    this.horizontalPart = new HorizontalPart();
+    this.verticalPart = new VerticalPart();
 
     const $div = document.createElement('div');
     $div.style.height = '100%';
@@ -18,7 +18,7 @@ class Main {
     const $leftDiv = document.createElement('div');
     const $rightDiv = document.createElement('div');
 
-    addClassStyle(verticalPart.$elem, {width: '100%'});
+    addClassStyle(this.verticalPart.$elem, {width: '100%'});
     addClassStyle($leftDiv, {overflow: 'scroll', marginRight: '3%', marginLeft: '3%', borderBottom : `2px solid ${COLOR.MAIN}`, borderTop: `2px solid ${COLOR.MAIN}`});
 
     $leftDiv.style.width = '50%';
@@ -27,7 +27,7 @@ class Main {
     $rightDiv.style.borderLeft = `2px solid ${COLOR.MAIN}`;
 
     const $header = document.createElement('div');
-    const symbol = new Image('./asset/symbol.svg', '60%', '60%');
+    const symbol = new Image('./src/asset/symbol.svg', '60%', '60%');
     addClassStyle(symbol.$elem, {padding: '2%', paddingBottom:'1%'});
     const $suchi = document.createElement('div');
     addClassStyle($suchi, {paddingBottom:'0.5rem', paddingRight:'2%', fontWeight: 'lighter', fontSize:'0.8rem'});
@@ -56,8 +56,8 @@ class Main {
     $address.appendChild(document.createTextNode('address_서울특별시 성북구 보문로63 동원빌딩 5F'));
     $contact.append($email, $insta, $address);
 
-    $leftDiv.append(verticalPart.$elem);
-    $rightDiv.appendChild(horizontalPart.$elem);
+    $leftDiv.append(this.verticalPart.$elem);
+    $rightDiv.appendChild(this.horizontalPart.$elem);
     const $mainBody = document.createElement('div');
     $mainBody.append($leftDiv, $rightDiv, $contact);
     addClassStyle($mainBody, {height:'91%', display:'flex', flexDirection:'row', overflow:'scroll'});
@@ -71,15 +71,11 @@ class Main {
     $div.style.margin = '0.1%';
 
     this.$elem = $div;
+  }
 
-    window.addEventListener('click', (e) => {
-      if (e.target.type === 'scroll'){
-        itemFetch(e.target.exhibitionId, () => {
-          horizontalPart.update();
-          verticalPart.update() ;
-        })
-      } 
-    });
+  update(){
+    this.horizontalPart.update();
+    this.verticalPart.update() ;
   }
 }
 

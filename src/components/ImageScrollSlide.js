@@ -16,12 +16,14 @@ class ImageScrollSlide {
         addClassStyle($imgDiv, ImageScrollSlide.imgDivStyle);
         $parentDiv.addEventListener('wheel', this.scrollHandler.bind(this));
 
-        imgsSrc.forEach((src, idx) => {
+        imgsSrc.forEach((elem, idx) => {
+            const src = elem[0];
+            const id = elem[1];
             const image = new Image(src, '25%', '25%');
             addClassStyle(image.$elem, {paddingRight: '5%', paddingLeft: '5%', verticalAlign: 'bottom',});
-            image.$elem.type = 'scroll';
+            image.$elem.targetType = 'selectItem';
             image.$elem.orderIdx = idx;
-            image.$elem.exhibitionId = ids[idx];
+            image.$elem.exhibitionId = id;
             $imgDiv.appendChild(image.$elem);
         });
         
@@ -38,7 +40,7 @@ class ImageScrollSlide {
         window.initLayout.push(this.initLayout.bind(this));
 
         this.$imgDiv.addEventListener('click', (e) => {
-            if (e.target.type === 'scroll'){
+            if (e.target.targetType === 'selectItem'){
                 this.$imgDiv.style.transition = 'transform 0.3s';
                 this.$imgDiv.className = 'imageScrollSlideDiv';
                 this.#pivotX = this.#imgsCenterX[e.target.orderIdx];

@@ -7,11 +7,12 @@ class HorizontalPart {
     const $div = document.createElement('div');
     addClassStyle($div, {height: '100%', userSelect: 'none'});
 
-    const slide = new ImageScrollSlide($div, ...HorizontalPart.imageScrollSlideViewModel());
+    const slide = new ImageScrollSlide($div, window.model.constant.scrollImgsUrl);
     slide.$elem.style.maxWidth = '100%';
     slide.$elem.style.height = '30%';
 
     const poster = new Poster()
+    poster.$elem.style.transition = 'opacity 1s';
     $div.append(
       poster.$elem, 
       slide.$elem,
@@ -20,32 +21,12 @@ class HorizontalPart {
     this.$elem = $div;
   }
 
-  static imageScrollSlideViewModel(){
-    const imgsSrc = window.model.scrollImgs;
-    const ids = []
-    for (let i = 0; i < imgsSrc.length; i++) {
-      ids.push(imgsSrc[i].slice(-5,-4));
-    } 
-    return [imgsSrc, ids]
-  }
-
-  static posterViewModel(){
-    //title, author, planner, writer,design, date, place, time, holder
-    const imgSrc = window.model.poster;
-    const title = window.model.title;
-    const author = window.model.author;
-    const planner = '주아명, 임재균';
-    const writer = '주아명';
-    const design = '곽나현, 이재석';
-    const date = window.model.date;
-    const place = '수치, 서울특별시 성북구 보문로 63 5층 503';
-    const time = '11am ~ 6pm';
-    const holder = '수치';
-    return [imgSrc, title, author, planner, writer, design, date, place, time, holder];
-  }
-
   update(){
-    this.poster.update(...HorizontalPart.posterViewModel());
+    this.poster.$elem.style.opacity = '0';
+    setTimeout(() => {
+      this.poster.update( window.model.data.horizontalInfo );
+      this.poster.$img.onload = () => { this.poster.$elem.style.opacity = '1'; }
+    }, 1000)
   }
 }
 
