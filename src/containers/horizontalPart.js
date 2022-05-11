@@ -4,6 +4,7 @@ import addClassStyle from '../../lib/addClassStyle.js';
 
 class HorizontalPart {
   constructor() {
+    this.viewTypeMobile = false;
     const $div = document.createElement('div');
     addClassStyle($div, {height: '100%', userSelect: 'none'});
 
@@ -19,6 +20,19 @@ class HorizontalPart {
     );
     this.poster = poster;
     this.$elem = $div;
+
+    window.addEventListener('resize', ()=>{
+      if (!this.viewTypeMobile && window.innerWidth < 800) {
+         poster.$elem.style.display = 'none';
+         slide.$elem.style.height = '100%';
+         this.viewTypeMobile = true;
+      }
+      else if (this.viewTypeMobile && window.innerWidth > 800) {
+        poster.$elem.style.display = 'flex';
+        slide.$elem.style.height = '30%';
+        this.viewTypeMobile = false;
+      }
+    });
   }
 
   update(){

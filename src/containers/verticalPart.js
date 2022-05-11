@@ -6,6 +6,7 @@ import addClassStyle from "../../lib/addClassStyle.js";
 class VerticalPart {
   constructor() {
     const $div = document.createElement('div');
+    $div.style.width = '100%';
     $div.style.transition = 'opacity 1s';
     const essay = new Essay(window.model.data.verticalInfo);
     addClassStyle(essay.$elem, 

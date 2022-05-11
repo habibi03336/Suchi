@@ -50,6 +50,12 @@ class ImageScrollSlide {
                 this.makeAnimation();
             }
         });
+
+        window.addEventListener('resize', ()=>{
+            this.#imgsCenterX = [];
+            this.initLayout();
+        });
+
     }
 
     initLayout(){
