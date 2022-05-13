@@ -29,7 +29,7 @@ class Main {
     $suchi.targetType = 'logoOrSymbol';
     addClassStyle($suchi, {paddingBottom:'0.5rem', paddingRight:'2%', fontWeight: 'lighter', fontSize:'0.8rem'});
     const $headerLeft = document.createElement('div');
-    addClassStyle($headerLeft, {height: '100%', width: '50%', display: 'flex', justifyContent: 'space-between', alignItems:'end'});
+    addClassStyle($headerLeft, {height: '100%', width: '50%', display: 'flex', justifyContent: 'space-between', alignItems:'flex-end'});
     $headerLeft.append(
       symbol.$elem,
       $suchi
