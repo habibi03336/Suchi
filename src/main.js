@@ -3,6 +3,7 @@ import VerticalPart from './containers/verticalPart.js';
 import COLOR from './constants/color.js'
 import addClassStyle from '../lib/addClassStyle.js';
 import Image from './components/image.js';
+import { debounce } from '../lib/scrooge.js';
 
 
 class Main {
@@ -66,7 +67,7 @@ class Main {
 
     this.$elem = $div;
 
-    window.addEventListener('resize', ()=>{
+    window.addEventListener('resize', debounce(()=>{
       $div.style.height = `${window.innerHeight - window.innerWidth * 0.002 - 4 }px`;
       if (!this.viewTypeMobile && window.innerWidth < 800) {
          addClassStyle($mainBody, {flexDirection:'column', marginRight : '3%'});
@@ -84,7 +85,7 @@ class Main {
         addClassStyle($contact, {writingMode: 'vertical-rl', width: '3%', height: ''});
         this.viewTypeMobile = false;
       }
-    });
+    }, 400));
   }
 
   update(){

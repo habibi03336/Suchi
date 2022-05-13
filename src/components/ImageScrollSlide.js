@@ -1,5 +1,6 @@
 import COLOR from "../constants/color.js";
 import addClassStyle from "../../lib/addClassStyle.js";
+import { debounce } from "../../lib/scrooge.js";
 import Image from "./image.js";
 
 class ImageScrollSlide {
@@ -51,10 +52,10 @@ class ImageScrollSlide {
             }
         });
 
-        window.addEventListener('resize', ()=>{
+        window.addEventListener('resize', debounce(()=>{    
             this.#imgsCenterX = [];
             this.initLayout();
-        });
+        }, 500));
 
     }
 

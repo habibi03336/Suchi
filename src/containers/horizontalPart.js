@@ -1,6 +1,7 @@
 import ImageScrollSlide from '../components/ImageScrollSlide.js';
 import Poster from '../components/poster.js';
 import addClassStyle from '../../lib/addClassStyle.js';
+import { debounce } from '../../lib/scrooge.js';
 
 class HorizontalPart {
   constructor() {
@@ -21,7 +22,7 @@ class HorizontalPart {
     this.poster = poster;
     this.$elem = $div;
 
-    window.addEventListener('resize', ()=>{
+    window.addEventListener('resize', debounce(()=>{
       if (!this.viewTypeMobile && window.innerWidth < 800) {
          poster.$elem.style.display = 'none';
          slide.$elem.style.height = '100%';
@@ -32,7 +33,7 @@ class HorizontalPart {
         slide.$elem.style.height = '30%';
         this.viewTypeMobile = false;
       }
-    });
+    }), 200);
   }
 
   update(){
