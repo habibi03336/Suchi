@@ -17,9 +17,11 @@ window.onload = async function(){
   window.addEventListener('click', async(e) => {
     if (e.target.targetType === 'selectItem'){
       await window.model.updateSelectedItem(e.target.exhibitionId);
-      console.log(window.model);
       main.update();
-    } 
+    } else if (e.target.targetType === 'logoOrSymbol') {
+      window.model.updateModel(null, false);
+      main.update();
+    }
   });
 
   window.initLayout.forEach(func => func());

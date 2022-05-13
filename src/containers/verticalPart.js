@@ -6,8 +6,7 @@ import addClassStyle from "../../lib/addClassStyle.js";
 class VerticalPart {
   constructor() {
     const $div = document.createElement('div');
-    $div.style.width = '100%';
-    $div.style.transition = 'opacity 1s';
+    addClassStyle($div, {height: '100%', width:'100%', overflow:'scroll', transition: 'opacity 1s'});
     const essay = new Essay(window.model.data.verticalInfo);
     addClassStyle(essay.$elem, 
       {
@@ -36,6 +35,7 @@ class VerticalPart {
   update(){
     this.$elem.style.opacity = '0';
     setTimeout(() => {
+      this.$elem.scrollTo(0, 0);
       this.essay.update(window.model.data.verticalInfo);
       this.$elem.style.opacity = '1';
     }, 1000)

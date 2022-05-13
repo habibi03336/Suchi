@@ -18,13 +18,15 @@ class Main {
     const $rightDiv = document.createElement('div');
     
     addClassStyle($div, {flexDirection:'column', display:'flex'});
-    addClassStyle($leftDiv, {width: '50%' ,overflow: 'scroll', marginRight: '3%', marginLeft: '3%', borderBottom : `2px solid ${COLOR.MAIN}`, borderTop: `2px solid ${COLOR.MAIN}`});
+    addClassStyle($leftDiv, {width: '50%', marginRight: '3%', marginLeft: '3%', borderBottom : `2px solid ${COLOR.MAIN}`, borderTop: `2px solid ${COLOR.MAIN}`});
     addClassStyle($rightDiv, {width:'47%', borderRight: `2px solid ${COLOR.MAIN}`, borderLeft: `2px solid ${COLOR.MAIN}`});
 
     const $header = document.createElement('div');
     const symbol = new Image('./src/asset/symbol.svg', '60%', '60%');
     addClassStyle(symbol.$elem, {padding: '2%', paddingBottom:'1%'});
     const $suchi = document.createElement('div');
+    symbol.$elem.targetType = 'logoOrSymbol';
+    $suchi.targetType = 'logoOrSymbol';
     addClassStyle($suchi, {paddingBottom:'0.5rem', paddingRight:'2%', fontWeight: 'lighter', fontSize:'0.8rem'});
     const $headerLeft = document.createElement('div');
     addClassStyle($headerLeft, {height: '100%', width: '50%', display: 'flex', justifyContent: 'space-between', alignItems:'end'});
@@ -52,7 +54,7 @@ class Main {
     $rightDiv.appendChild(this.horizontalPart.$elem);
     const $mainBody = document.createElement('div');
     $mainBody.append($leftDiv, $rightDiv, $contact);
-    addClassStyle($mainBody, {height:'91%', display:'flex', flexDirection:'row', overflow:'scroll'});
+    addClassStyle($mainBody, {height:'93%', display:'flex', flexDirection:'row', overflow:'scroll'});
 
     $div.append(
       $header,
@@ -67,15 +69,15 @@ class Main {
     window.addEventListener('resize', ()=>{
       $div.style.height = `${window.innerHeight - window.innerWidth * 0.002 - 4 }px`;
       if (!this.viewTypeMobile && window.innerWidth < 800) {
-         addClassStyle($mainBody, {height:'94%', flexDirection:'column', marginRight : '3%'});
-         addClassStyle($leftDiv, {height: '80%', width: '100%'});
+         addClassStyle($mainBody, {flexDirection:'column', marginRight : '3%'});
+         addClassStyle($leftDiv, {height: '77%', width: '100%'});
          addClassStyle($rightDiv, {height: '20%', width: '100%'});
          addClassStyle($headerLeft, {width: '100%'});
          addClassStyle($contact, {writingMode: 'horizontal-tb', width: '100%', height: '3%'});
          this.viewTypeMobile = true;
       }
       else if (this.viewTypeMobile && window.innerWidth > 800) {
-        addClassStyle($mainBody, {height:'91%', flexDirection:'row',  marginRight : ''});
+        addClassStyle($mainBody, {flexDirection:'row',  marginRight : ''});
         addClassStyle($leftDiv, {height: '', width: '50%'});
         addClassStyle($rightDiv, {height: '', width: '47%'});
         addClassStyle($headerLeft, {width: '50%'});

@@ -38,13 +38,26 @@ class Poster {
     }
 
     update(posterInfos){
+        if (posterInfos === null) {
+            this.$img.src = Poster.defaultContent.symbol;
+            this.$img.style.maxHeight = '18%';
+            this.$img.style.maxWidth = '18%';
+            this.$infoDiv.textContent = '';
+            const $title = document.createElement('p');
+            $title.appendChild(document.createTextNode(Poster.defaultContent.title));
+            const $description = document.createElement('p');
+            $description.appendChild(document.createTextNode(Poster.defaultContent.description));
+            addClassStyle($description, {lineHeight:'1.5rem', marginTop:'1.2rem'})
+            this.$infoDiv.append($title, $description);
+            return;
+        }
         this.$img.src = posterInfos.imgUrl;
         this.$img.style.maxHeight = '50%';
         this.$img.style.maxWidth = '50%';
         this.$infoDiv.textContent = '';
         const infoList = [];
         Object.entries(posterInfos).forEach(([key, value]) => {
-            if (value === 'br'){
+            if (key.slice(0, 4) === '띄어쓰기' || Poster.infoNameTable[key] === '띄어쓰기'){
                 infoList.push(document.createElement('br'));
             } else {
                 infoList.push(this.posterLinegenerator(Poster.infoNameTable[key], value))
@@ -55,41 +68,32 @@ class Poster {
     }
 
     posterLinegenerator(name, data){
-        const $p = document.createElement('p');
+        const $p = document.createElement('div');
         $p.appendChild(document.createTextNode(name+'| '+data));
         return $p
     }
 
 
     static infoNameTable = {
-        imgUrl: 'br',
+        imgUrl: '띄어쓰기',
         title: '제목',
-        br1: 'br',
         artist: '작가',
-        br2: 'br',
         curator: '기획',
         text: '글',
         design: '디자인',
-        b3: 'br',
         date: '날짜',
         place: '장소',
         time: '시간',
         organize: '주최',
-        br4: 'br',
-        br5: 'br',
-        br6: 'br',
         titleEng: 'Title',
-        br7: 'br',
         artistEng: 'Artists',
-        br8: 'br',
         curatorEng: 'Curators',
         textEng: 'Text',
         designEng: 'Design',
-        br9: 'br',
         dateEng: 'Dates',
         placeEng: 'Site',
         timeEng: 'Hours',
-        organize: 'Organized by'
+        organizeEng: 'Organized by'
     };
 }   
 
