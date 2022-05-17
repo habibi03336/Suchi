@@ -1,4 +1,4 @@
-import COLOR from "../constants/color.js";
+import { COLOR } from '../constants.js';
 import addClassStyle from "../../lib/addClassStyle.js";
 import { debounce } from "../../lib/scrooge.js";
 import Image from "./image.js";
@@ -20,7 +20,7 @@ class ImageScrollSlide {
         imgsSrc.forEach((elem, idx) => {
             const src = elem[0];
             const id = elem[1];
-            const image = new Image(src, '25%', '25%');
+            const image = new Image(src, '20%', '20%');
             addClassStyle(image.$elem, {paddingRight: '5%', paddingLeft: '5%', verticalAlign: 'bottom',});
             image.$elem.targetType = 'selectItem';
             image.$elem.orderIdx = idx;

@@ -1,6 +1,6 @@
 import HorizontalPart from './containers/horizontalPart.js';
 import VerticalPart from './containers/verticalPart.js';
-import COLOR from './constants/color.js'
+import { COLOR, VIEWSIZE } from './constants.js'
 import addClassStyle from '../lib/addClassStyle.js';
 import Image from './components/image.js';
 import { debounce } from '../lib/scrooge.js';
@@ -69,7 +69,7 @@ class Main {
 
     window.addEventListener('resize', debounce(()=>{
       $div.style.height = `${window.innerHeight - window.innerWidth * 0.002 - 4 }px`;
-      if (!this.viewTypeMobile && window.innerWidth < 800) {
+      if (!this.viewTypeMobile && window.innerWidth < VIEWSIZE.REACTWIDTH) {
          addClassStyle($mainBody, {flexDirection:'column', marginRight : '3%'});
          addClassStyle($leftDiv, {height: '77%', width: '100%'});
          addClassStyle($rightDiv, {height: '20%', width: '100%'});
@@ -77,7 +77,7 @@ class Main {
          addClassStyle($contact, {writingMode: 'horizontal-tb', width: '100%', height: '3%'});
          this.viewTypeMobile = true;
       }
-      else if (this.viewTypeMobile && window.innerWidth > 800) {
+      else if (this.viewTypeMobile && window.innerWidth > VIEWSIZE.REACTWIDTH) {
         addClassStyle($mainBody, {flexDirection:'row',  marginRight : ''});
         addClassStyle($leftDiv, {height: '', width: '50%'});
         addClassStyle($rightDiv, {height: '', width: '47%'});

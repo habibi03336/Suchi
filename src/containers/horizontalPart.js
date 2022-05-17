@@ -1,6 +1,7 @@
 import ImageScrollSlide from '../components/ImageScrollSlide.js';
 import Poster from '../components/poster.js';
 import addClassStyle from '../../lib/addClassStyle.js';
+import { VIEWSIZE } from '../constants.js';
 import { debounce } from '../../lib/scrooge.js';
 
 class HorizontalPart {
@@ -23,12 +24,12 @@ class HorizontalPart {
     this.$elem = $div;
 
     window.addEventListener('resize', debounce(()=>{
-      if (!this.viewTypeMobile && window.innerWidth < 800) {
+      if (!this.viewTypeMobile && window.innerWidth < VIEWSIZE.REACTWIDTH) {
          poster.$elem.style.display = 'none';
          slide.$elem.style.height = '100%';
          this.viewTypeMobile = true;
       }
-      else if (this.viewTypeMobile && window.innerWidth > 800) {
+      else if (this.viewTypeMobile && window.innerWidth > VIEWSIZE.REACTWIDTH) {
         poster.$elem.style.display = 'flex';
         slide.$elem.style.height = '30%';
         this.viewTypeMobile = false;

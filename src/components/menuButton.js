@@ -1,6 +1,6 @@
 import Image from './image.js';
 import addClassStyle from '../../lib/addClassStyle.js';
-import COLOR from '../constants/color.js';
+import { COLOR } from '../constants.js';
 
 class MenuButton extends Image {
   constructor(imgSrc) {

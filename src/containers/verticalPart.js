@@ -1,6 +1,5 @@
 import Image from "../components/image.js";
 import Essay from "../components/essay.js";
-import COLOR from "../constants/color.js";
 import addClassStyle from "../../lib/addClassStyle.js";
 
 class VerticalPart {
