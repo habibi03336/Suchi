@@ -3,7 +3,7 @@ const COLOR = {
 };
 
 const VIEWSIZE = {
-  REACTWIDTH: 5000
+  REACTWIDTH: 1000
 };
 
 export { COLOR, VIEWSIZE };

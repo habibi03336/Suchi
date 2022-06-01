@@ -20,12 +20,12 @@ class Poster {
         });
         const symbol = new Image(Poster.defaultContent.symbol, '18%', '18%');
         const $infoDiv = document.createElement('div');
-        addClassStyle($infoDiv, {padding: '0 0 0 10%', fontSize: '0.8rem', fontWeight:'lighter'});
+        addClassStyle($infoDiv, {padding: '0 0 0 7%', fontSize: '0.6rem', fontWeight:'lighter'});
         const $title = document.createElement('p');
         $title.appendChild(document.createTextNode(Poster.defaultContent.title));
         const $description = document.createElement('p');
         $description.appendChild(document.createTextNode(Poster.defaultContent.description));
-        addClassStyle($description, {lineHeight:'1.5rem', marginTop:'1.2rem'})
+        addClassStyle($description, {lineHeight:'1rem', marginTop:'1.2rem'})
         $infoDiv.append($title, $description);
 
 
@@ -45,15 +45,16 @@ class Poster {
             this.$infoDiv.textContent = '';
             const $title = document.createElement('p');
             $title.appendChild(document.createTextNode(Poster.defaultContent.title));
+            addClassStyle($title, {marginTop: "5px", marginBottom: "5px"})
             const $description = document.createElement('p');
             $description.appendChild(document.createTextNode(Poster.defaultContent.description));
-            addClassStyle($description, {lineHeight:'1.5rem', marginTop:'1.2rem'})
+            addClassStyle($description, {lineHeight:'1rem', marginTop: "5px", marginBottom: "5px"})
             this.$infoDiv.append($title, $description);
             return;
         }
         this.$img.src = posterInfos.imgUrl;
-        this.$img.style.maxHeight = '50%';
-        this.$img.style.maxWidth = '50%';
+        this.$img.style.maxHeight = '70%';
+        this.$img.style.maxWidth = '70%';
         this.$infoDiv.textContent = '';
         const infoList = [];
         Object.entries(posterInfos).forEach(([key, value]) => {

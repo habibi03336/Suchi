@@ -9,7 +9,7 @@ class VerticalPart {
     const essay = new Essay(window.model.data.verticalInfo);
     addClassStyle(essay.$elem, 
       {
-        padding: '10%', 
+        padding: '3%', 
         paddingTop: '5%', 
         paddingBottom: '1%',
       });
