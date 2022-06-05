@@ -6,13 +6,15 @@ window.onload = async function(){
 
   window.model = new Model();
   await window.model.initData();
-
+  
   const main = new Main();
   main.update();
 
   document.body.append(
     main.$elem,
   );
+
+  window.dispatchEvent(new Event('resize'));
 
   window.addEventListener('click', async(e) => {
     if (e.target.targetType === 'selectItem'){
