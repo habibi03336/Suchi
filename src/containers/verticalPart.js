@@ -1,6 +1,7 @@
 import Image from "../components/image.js";
 import Essay from "../components/essay.js";
 import addClassStyle from "../../lib/addClassStyle.js";
+import ticketUI  from "../components/ticketUI.js";
 
 class VerticalPart {
   constructor() {
@@ -22,13 +23,17 @@ class VerticalPart {
       $imageDiv.append(image.$elem);
     });
 
+    const $ticketUI = document.createElement('div');
+    ReactDOM.render(ticketUI(), $ticketUI);
+
     $div.append(
       essay.$elem,
       $imageDiv,
+      $ticketUI,
     );
+
     this.essay = essay;
     this.$elem = $div;
-
   }
 
   update(){

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suchi</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'IBM Plex Sans KR', sans-serif;
+        }
+        /* Hide scrollbar */
+        div::-webkit-scrollbar {
+            display: none; /*Chore, safari*/
+        }
+        div {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .imageScrollSlideDiv{
+            -webkit-transition: -webkit-transform 0.3s;
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/react/0.14.0-rc1/react.js"></script>
+    <script src="https://cdn.jsdelivr.net/react/0.14.0-rc1/react-dom.js"></script>
+    <script>
+        window.ReactDOM = ReactDOM;
+        window.React = React;
+    </script>
+    <script type='module' src="./app.js"></script>
+</body>
+</html>
