@@ -1,7 +1,7 @@
 import ImageScrollSlide from '../components/ImageScrollSlide.js';
 import Poster from '../components/poster.js';
 import addClassStyle from '../../lib/addClassStyle.js';
-import { VIEWSIZE } from '../constants.js';
+import { VIEWSIZE, EVENT } from '../constants.js';
 import { debounce } from '../../lib/scrooge.js';
 
 class HorizontalPart {
@@ -37,12 +37,14 @@ class HorizontalPart {
     }), 200);
   }
 
-  update(){
-    this.poster.$elem.style.opacity = '0';
-    setTimeout(() => {
-      this.poster.update( window.model.data.horizontalInfo );
-      this.poster.$img.onload = () => { this.poster.$elem.style.opacity = '1'; }
-    }, 1000)
+  update(eventType){
+    if (eventType === EVENT.LOAD) {
+      this.poster.$elem.style.opacity = '0';
+      setTimeout(() => {
+        this.poster.update( window.model.data.horizontalInfo );
+        this.poster.$img.onload = () => { this.poster.$elem.style.opacity = '1'; }
+      }, 1000)
+    }
   }
 }
 

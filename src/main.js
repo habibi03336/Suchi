@@ -1,9 +1,10 @@
 import HorizontalPart from './containers/horizontalPart.js';
 import VerticalPart from './containers/verticalPart.js';
-import { COLOR, VIEWSIZE } from './constants.js'
+import { COLOR, VIEWSIZE, EVENT } from './constants.js'
 import addClassStyle from '../lib/addClassStyle.js';
 import Image from './components/image.js';
 import { debounce } from '../lib/scrooge.js';
+import ticketUI  from "./components/ticketUI.js";
 
 
 class Main {
@@ -11,8 +12,9 @@ class Main {
   constructor(model) {
     this.viewTypeMobile = false;
     this.model = model;
+    this.ticketUI = new ticketUI([true, true, false, true, true]);
     this.horizontalPart = new HorizontalPart();
-    this.verticalPart = new VerticalPart();
+    this.verticalPart = new VerticalPart(this.ticketUI.$elem);
 
     const $div = document.createElement('div');
     const $leftDiv = document.createElement('div');
@@ -88,9 +90,13 @@ class Main {
     }, 400));
   }
 
-  update(){
-    this.horizontalPart.update();
-    this.verticalPart.update() ;
+  update(eventType){
+    if (eventType === EVENT.LOAD) {
+      this.horizontalPart.update(eventType);
+      this.verticalPart.update(eventType) ;
+    } else if (eventType === EVENT.TICKETUI){
+      this.ticketUI.update(window.model.state);
+    }
   }
 }
 
