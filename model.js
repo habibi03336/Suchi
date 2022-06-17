@@ -1,59 +1,35 @@
-import config from './config'
-
-
-interface image {
-    imgUrl: string;
-    imgCaption: string;
-}
-
-interface verticalInfo {
-    title : string;
-    artist : string;
-    date : string;
-    description: string;
-    images : image[];
-}
-
-interface horizontalInfo {
-    [key: string]: string;
-}
-
-interface data {
-    verticalInfo: verticalInfo;
-    horizontalInfo: horizontalInfo | null;
-} 
-
-interface constant {
-    scrollImgsUrl: string[];
-}
+import config from './config.js';
+import { STATE } from './src/constants.js';
 
 class Model {
-    data: data;
-    constant: constant;
-
     constructor(){
-        this.data = {} as data;
-        this.constant = {} as constant;
+        this.data = {};
+        this.constant = {};
+        this.state = STATE.DEFAULT;
     }
 
     async initData(){
         const [_data, _constants] = await Promise.all([fetch(config.address.back + 'exhibitions'), fetch(config.address.back + 'scrollImgs')]);
         const [data, constant] = await Promise.all([_data.json(), _constants.json()]);
-        this.constant.scrollImgsUrl = constant.map((elem: string[]) => [config.address.back + elem[0], elem[1]]);
+        this.constant.scrollImgsUrl = constant.map((elem) => [config.address.back + elem[0], elem[1]]);
         this.updateModel(data[0], false);
     }
 
-    async getItem(itemId: number){
+    async getItem(itemId){
         const _data = await fetch(config.address.back + 'exhibitions/' + String(itemId));
         const data = await _data.json()
         this.updateModel(data, true);
     }
 
-    async updateSelectedItem(itemId: number) {
+    async updateSelectedItem(itemId) {
         await this.getItem(itemId);
     }
 
-    updateModel(data: any, isSelected: boolean){
+    updateState(state){
+        this.state = state;
+    }
+
+    updateModel(data, isSelected){
         if (isSelected){
             this.data = {
                 verticalInfo: {
@@ -61,7 +37,7 @@ class Model {
                     artist : data.artist,
                     date : data.date,
                     description: data.description,
-                    images : data.images.map((elem: string) => config.address.back + elem),
+                    images : data.images.map((elem) => config.address.back + elem),
                 },
                 horizontalInfo: {
                     imgUrl: config.address.back + data.imgUrl,
@@ -96,7 +72,7 @@ class Model {
                 artist: data.artist,
                 date: data.date,
                 description: data.description,
-                images: data.images.map((elem: string) => config.address.back + elem),
+                images: data.images.map((elem) => config.address.back + elem),
             };
             this.data.horizontalInfo = null;
         }

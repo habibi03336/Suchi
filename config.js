@@ -1,12 +1,7 @@
-interface config {
-    address: any;
-}
-
 const config = {
-    address : {
+    address: {
         back: 'http://localhost:1234/',
         front: '',
     }
-}
-
+};
 export default config;
