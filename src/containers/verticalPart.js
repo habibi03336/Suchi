@@ -23,13 +23,9 @@ class VerticalPart {
       $imageDiv.append(image.$elem);
     });
 
-    const $ticketUI = document.createElement('div');
-    ReactDOM.render(ticketUI(), $ticketUI);
-
     $div.append(
       essay.$elem,
-      $imageDiv,
-      $ticketUI,
+      $imageDiv
     );
 
     this.essay = essay;
