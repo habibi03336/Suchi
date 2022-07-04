@@ -1,0 +1,10 @@
+.defaultButton {
+    border: 1px solid gray;
+    border-radius: 10%;
+}
+
+.minimal-button {
+    padding: 0;
+    border: none;
+    background: none;
+}

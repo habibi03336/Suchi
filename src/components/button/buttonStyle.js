@@ -20,4 +20,13 @@ const ticket_select = {
     border: '1px solid gray'
 }
 
-export default { ticket_avail, ticket_unavail, ticket_select }
+const defaultButton = {
+    width: '20%',
+    border: '1px soild gray'
+}
+
+const minimalButton = {
+    padding: 0, border: 'none', background: 'none'
+}
+
+export default { ticket_avail, ticket_unavail, ticket_select, defaultButton, minimalButton }
