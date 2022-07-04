@@ -4,7 +4,8 @@ import { COLOR, VIEWSIZE, EVENT } from './constants.js'
 import addClassStyle from '../lib/addClassStyle.js';
 import Image from './components/image.js';
 import { debounce } from '../lib/scrooge.js';
-import ticketUI  from "./components/ticketUI.js";
+import ticketUI  from "./containers/ticketUI.js";
+
 
 
 class Main {

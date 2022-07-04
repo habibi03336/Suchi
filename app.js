@@ -24,14 +24,14 @@ window.onload = async function(){
     } else if (e.target.targetType === 'logoOrSymbol') {
       window.model.updateModel(null, false);
       main.update(EVENT.LOAD);
-    } else if (e.target.targetType === 'ticketButton') {
-      window.model.updateState(STATE.SELCET);
-      main.update(EVENT.TICKETUI);
     } else if (e.target.targetType === 'ticketSelect') {
-      window.model.updateState(STATE.SIGN);
+      window.model.updateState(STATE.TICKETSIGN);
       main.update(EVENT.TICKETUI);
-    } else if (e.target.targetType === 'ticketSignIn') {
-      window.model.updateState(STATE.MODAL);
+    } else if (e.target.targetType === 'signatureAdmit') {
+      window.model.updateState(STATE.TICKETMODAL);
+      main.update(EVENT.TICKETUI);
+    } else if (e.target.targetType === 'signatureCancel') {
+      window.model.updateState(STATE.DEFAULT);
       main.update(EVENT.TICKETUI);
     }
   });
